@@ -1,0 +1,32 @@
+<!doctype html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=block" rel="stylesheet">
+<style>body{margin:0;font-family:Tajawal,sans-serif;background:#faf7f1;color:#1b1408;--color-primary:#b88a44}</style>
+<script>
+const P = {
+  1: { id: 1, name: 'طقم الإشراقة الوردي', url: '#', image: { url: 'img/p1.jpg' }, price: 320, sale_price: 260, regular_price: 320, rating: { stars: 4.8, count: 214 }, quantity: 3, is_available: true },
+  2: { id: 2, name: 'زبدة الجسم الطبيعية', url: '#', image: { url: 'img/p2.jpg' }, price: 190, regular_price: 190, rating: { stars: 4.6, count: 98 }, quantity: 40, is_available: true },
+  3: { id: 3, name: 'صندوق هدية فاخر', url: '#', image: { url: 'img/p3.jpg' }, price: 540, sale_price: 420, regular_price: 540, rating: { stars: 4.9, count: 61 }, quantity: 12, is_available: true },
+  4: { id: 4, name: 'باليت ظلال الغروب', url: '#', image: { url: 'img/p4.jpg' }, price: 145, regular_price: 145, rating: { stars: 4.4, count: 33 }, quantity: 0, is_available: false },
+};
+window.Salla = { onReady: async () => {}, money: (n) => `${Number(n).toLocaleString('en')} ر.س`, success: (m) => console.log('toast', m),
+  product: { api: { getDetails: async (id) => ({ data: P[id] }) } }, cart: { addItem: async () => ({}) } };
+</script><script type="module" src="bundle.js"></script></head><body>
+<salla-tuhfa-hero id="hero"></salla-tuhfa-hero>
+<salla-tuhfa-smart-products id="sp"></salla-tuhfa-smart-products>
+<salla-tuhfa-countdown id="cd"></salla-tuhfa-countdown>
+<salla-tuhfa-numbers id="nu"></salla-tuhfa-numbers>
+<salla-tuhfa-compare id="cmp"></salla-tuhfa-compare>
+<salla-tuhfa-reviews id="rv"></salla-tuhfa-reviews>
+<salla-tuhfa-categories id="cat"></salla-tuhfa-categories>
+<script>
+const cfg = {
+  hero: { slides: [{ image: 'img/hero1.jpg', title: 'هدايا تُروى ولا تُنسى', subtitle: 'تغليف فاخر وبطاقة إهداء مع كل طلب', button: 'اكتشف المجموعة', link: '#' }, { image: 'img/c1.jpg', title: 'جمال يليق بك', subtitle: 'ألوان مختارة من أرقى الدور', button: 'تسوّق المكياج', link: '#' }], height: 82, seconds: 6, overlay: 55 },
+  sp: { title: 'اختياراتنا لك', subtitle: 'شارات تُحسب تلقائياً من بيانات متجرك: الخصم، آخر القطع، الأعلى تقييماً، الأوفر', products: [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }], dark: true },
+  cd: { title: 'عرض نهاية الأسبوع', subtitle: 'خصم 25٪ على كل الهدايا — لفترة محدودة', end: new Date(Date.now() + 2 * 86400e3 + 5 * 3600e3).toISOString(), coupon: 'OUD25', image: 'img/c5.jpg', button: 'تسوّق العرض', link: '#' },
+  nu: { title: 'متجرنا بالأرقام', subtitle: 'ثقة بُنيت طلب بعد طلب', items: [{ icon: '😊', number: 12000, suffix: '+', label: 'عميل سعيد' }, { icon: '📦', number: 25000, suffix: '+', label: 'طلب وصل' }, { icon: '⭐', number: 98, suffix: '٪', label: 'تقييمات إيجابية' }, { icon: '🚚', number: 48, suffix: ' ساعة', label: 'متوسط التوصيل' }] },
+  cmp: { title: 'أيهم يناسبك؟', subtitle: 'نقارن لك السعر والتوفير والتقييم والتوفر، ونرشّح الاختيار الذكي', products: [{ value: 1 }, { value: 2 }, { value: 3 }] },
+  rv: { title: 'وش يقولون عنا', reviews: [{ name: 'نورة', city: 'الرياض', text: 'التغليف فخم والتوصيل سريع، تجربة تستاهل', stars: 5 }, { name: 'فهد', city: 'جدة', text: 'الجودة أعلى من المتوقع وخدمة العملاء محترمة', stars: 5 }, { name: 'سارة', city: 'الدمام', text: 'ثاني طلب لي ومستحيل يكون الأخير', stars: 4 }, { name: 'عبدالله', city: 'مكة', text: 'الريحة ثابتة طول اليوم، أنصح فيه', stars: 5 }], badges: [{ emoji: '🔒', text: 'دفع آمن' }, { emoji: '🚚', text: 'توصيل سريع' }, { emoji: '↩️', text: 'استرجاع سهل' }] },
+  cat: { title: 'تسوّق حسب القسم', subtitle: 'كل قسم قصة', tiles: [{ image: 'img/hero3.jpg', title: 'العناية بالبشرة', caption: 'اكتشف المجموعة', link: '#' }, { image: 'img/c1.jpg', title: 'المكياج', caption: 'تسوّق الآن', link: '#' }, { image: 'img/c2.jpg', title: 'الشعر', caption: 'تسوّق الآن', link: '#' }, { image: 'img/c6.jpg', title: 'الهدايا', caption: 'تسوّق الآن', link: '#' }, { image: 'img/c4.jpg', title: 'الجسم', caption: 'تسوّق الآن', link: '#' }, { image: 'img/c3.jpg', title: 'الرجال', caption: 'تسوّق الآن', link: '#' }] },
+};
+for (const [id, c] of Object.entries(cfg)) document.getElementById(id).config = c;
+</script></body></html>
