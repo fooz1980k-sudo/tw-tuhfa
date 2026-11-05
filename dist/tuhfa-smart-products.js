@@ -1,6 +1,6 @@
-import { css as y, LitElement as $, html as d } from "lit";
+import { css as x, LitElement as $, html as d } from "lit";
 import { property as k, state as v } from "lit/decorators.js";
-const p = y`
+const p = x`
   :host { display: block; --tf-accent: var(--tf-custom, var(--color-primary, #c9a45c)); --tf-ink: #0f0c18; --tf-ivory: #f6f1e7; --tf-mut: #a59bc2;
     --tf-gold: linear-gradient(135deg, #f5d68a, #c9a45c 55%, #9a7634); font-family: inherit; direction: inherit; }
   :host([hidden]) { display: none; }
@@ -17,27 +17,27 @@ const p = y`
   .skel { background: linear-gradient(90deg, #8881 0, #8882 50%, #8881 100%); background-size: 200% 100%; animation: sk 1.4s infinite; border-radius: 14px; }
   @keyframes sk { to { background-position: -200% 0; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-`, g = () => window.Salla, w = async () => {
+`, u = () => window.Salla, w = async () => {
   var t, a;
   try {
-    await ((a = (t = g()) == null ? void 0 : t.onReady) == null ? void 0 : a.call(t));
+    await ((a = (t = u()) == null ? void 0 : t.onReady) == null ? void 0 : a.call(t));
   } catch {
   }
-}, x = (t, a) => (document.documentElement.lang || "ar").startsWith("en") ? a : t, c = (t) => {
-  const a = typeof t == "object" && t ? t.amount : t, e = Number(a);
-  return Number.isFinite(e) ? e : 0;
+}, y = (t, a) => (document.documentElement.lang || "ar").startsWith("en") ? a : t, c = (t) => {
+  const a = typeof t == "object" && t ? t.amount : t, r = Number(a);
+  return Number.isFinite(r) ? r : 0;
 };
 function z(t) {
-  var i, r, o, l, n, s;
-  const a = c(t == null ? void 0 : t.sale_price) && c(t == null ? void 0 : t.sale_price) < c((t == null ? void 0 : t.regular_price) ?? (t == null ? void 0 : t.price)) ? c(t == null ? void 0 : t.sale_price) : c(t == null ? void 0 : t.price), e = Math.max(c(t == null ? void 0 : t.regular_price), c(t == null ? void 0 : t.price), a);
+  var e, i, n, l, o, s;
+  const a = c(t == null ? void 0 : t.sale_price) && c(t == null ? void 0 : t.sale_price) < c((t == null ? void 0 : t.regular_price) ?? (t == null ? void 0 : t.price)) ? c(t == null ? void 0 : t.sale_price) : c(t == null ? void 0 : t.price), r = Math.max(c(t == null ? void 0 : t.regular_price), c(t == null ? void 0 : t.price), a);
   return {
     id: Number(t == null ? void 0 : t.id),
     name: String((t == null ? void 0 : t.name) ?? ""),
     url: String((t == null ? void 0 : t.url) ?? "#"),
-    image: String(((i = t == null ? void 0 : t.image) == null ? void 0 : i.url) ?? (t == null ? void 0 : t.main_image) ?? (t == null ? void 0 : t.thumbnail) ?? ((o = (r = t == null ? void 0 : t.images) == null ? void 0 : r[0]) == null ? void 0 : o.url) ?? ""),
+    image: String(((e = t == null ? void 0 : t.image) == null ? void 0 : e.url) ?? (t == null ? void 0 : t.main_image) ?? (t == null ? void 0 : t.thumbnail) ?? ((n = (i = t == null ? void 0 : t.images) == null ? void 0 : i[0]) == null ? void 0 : n.url) ?? ""),
     price: a,
-    regular: e,
-    rating: c(((l = t == null ? void 0 : t.rating) == null ? void 0 : l.stars) ?? ((n = t == null ? void 0 : t.rating) == null ? void 0 : n.rate) ?? (t == null ? void 0 : t.rating)),
+    regular: r,
+    rating: c(((l = t == null ? void 0 : t.rating) == null ? void 0 : l.stars) ?? ((o = t == null ? void 0 : t.rating) == null ? void 0 : o.rate) ?? (t == null ? void 0 : t.rating)),
     ratingCount: c((s = t == null ? void 0 : t.rating) == null ? void 0 : s.count),
     qty: (t == null ? void 0 : t.quantity) == null || t != null && t.unlimited_quantity ? null : c(t == null ? void 0 : t.quantity),
     available: (t == null ? void 0 : t.is_available) !== !1 && (t == null ? void 0 : t.status) !== "out"
@@ -45,76 +45,101 @@ function z(t) {
 }
 const q = (t) => (Array.isArray(t) ? t : []).map((a) => Number(typeof a == "object" && a ? a.value : a)).filter((a) => Number.isFinite(a) && a > 0);
 async function _(t) {
-  return await w(), (await Promise.all(q(t).map((e) => {
-    var i, r, o, l;
-    return (l = (o = (r = (i = g()) == null ? void 0 : i.product) == null ? void 0 : r.api) == null ? void 0 : o.getDetails) == null ? void 0 : l.call(o, e).then((n) => z(n == null ? void 0 : n.data)).catch(() => null);
-  }))).filter((e) => !!e && !!e.name);
+  return await w(), (await Promise.all(q(t).map((r) => {
+    var e, i, n, l;
+    return (l = (n = (i = (e = u()) == null ? void 0 : e.product) == null ? void 0 : i.api) == null ? void 0 : n.getDetails) == null ? void 0 : l.call(n, r).then((o) => z(o == null ? void 0 : o.data)).catch(() => null);
+  }))).filter((r) => !!r && !!r.name);
 }
 const b = (t) => {
-  var a, e;
+  var a, r;
   try {
-    return ((e = (a = g()) == null ? void 0 : a.money) == null ? void 0 : e.call(a, t)) ?? `${t} ${x("ر.س", "SAR")}`;
+    return ((r = (a = u()) == null ? void 0 : a.money) == null ? void 0 : r.call(a, t)) ?? `${t} ${y("ر.س", "SAR")}`;
   } catch {
-    return `${t} ${x("ر.س", "SAR")}`;
+    return `${t} ${y("ر.س", "SAR")}`;
   }
 };
-async function C(t) {
-  var a, e, i;
+async function S(t) {
+  var a, r, e;
   await w();
   try {
-    await ((i = (e = (a = g()) == null ? void 0 : a.cart) == null ? void 0 : e.addItem) == null ? void 0 : i.call(e, { id: t, quantity: 1 }));
+    await ((e = (r = (a = u()) == null ? void 0 : a.cart) == null ? void 0 : r.addItem) == null ? void 0 : e.call(r, { id: t, quantity: 1 }));
   } catch {
     location.href = `${location.origin}/p${t}`;
   }
 }
-function S(t) {
-  var a, e;
+function j(t) {
+  var a, r;
   try {
-    (e = (a = g()) == null ? void 0 : a.success) == null || e.call(a, t);
+    (r = (a = u()) == null ? void 0 : a.success) == null || r.call(a, t);
   } catch {
   }
 }
-const f = (t) => String(t && typeof t == "object" ? t[(document.documentElement.lang || "ar").slice(0, 2)] ?? t.ar ?? "" : t ?? "");
-var j = Object.defineProperty, m = (t, a, e, i) => {
-  for (var r = void 0, o = t.length - 1, l; o >= 0; o--)
-    (l = t[o]) && (r = l(a, e, r) || r);
-  return r && j(a, e, r), r;
+const C = () => {
+  var t, a, r, e, i;
+  try {
+    const n = ((a = (t = u()) == null ? void 0 : t.lang) == null ? void 0 : a.locale) ?? ((i = (e = (r = u()) == null ? void 0 : r.config) == null ? void 0 : e.get) == null ? void 0 : i.call(e, "user.language_code"));
+    if (typeof n == "string" && n) return n.slice(0, 2);
+  } catch {
+  }
+  return (document.documentElement.lang || "ar").slice(0, 2);
+}, g = (t) => {
+  if (t == null) return "";
+  if (typeof t == "string") {
+    const a = t.trim();
+    if (a.startsWith("{") && a.endsWith("}"))
+      try {
+        return g(JSON.parse(a));
+      } catch {
+      }
+    return t;
+  }
+  if (typeof t == "number" || typeof t == "boolean") return String(t);
+  if (typeof t == "object") {
+    const a = t, r = a[C()] ?? a.ar ?? a.en ?? Object.values(a).find((e) => typeof e == "string" && e);
+    return typeof r == "string" ? r : "";
+  }
+  return "";
+};
+var M = Object.defineProperty, m = (t, a, r, e) => {
+  for (var i = void 0, n = t.length - 1, l; n >= 0; n--)
+    (l = t[n]) && (i = l(a, r, i) || i);
+  return i && M(a, r, i), i;
 };
 const h = class h extends $ {
   constructor() {
     super(...arguments), this.list = null, this.busy = 0, this.seq = 0;
   }
   willUpdate(a) {
-    var e;
+    var r;
     if (a.has("config")) {
-      const i = ++this.seq;
-      this.list = null, _((e = this.config) == null ? void 0 : e.products).then((r) => {
-        i === this.seq && (this.list = r);
+      const e = ++this.seq;
+      this.list = null, _((r = this.config) == null ? void 0 : r.products).then((i) => {
+        e === this.seq && (this.list = i);
       });
     }
   }
-  badges(a, e) {
-    const i = [], r = a.regular > a.price ? Math.round((1 - a.price / a.regular) * 100) : 0;
-    return r >= 5 && i.push([`خصم ${r}٪`, "hot"]), a.qty != null && a.qty > 0 && a.qty <= 5 && i.push([`آخر ${a.qty} قطع`, ""]), e.reduce((n, s) => s.rating * Math.log2(2 + s.ratingCount) > n.rating * Math.log2(2 + n.ratingCount) ? s : n, e[0]) === a && a.rating >= 4 && i.push(["الأعلى تقييماً", "gold"]), e.reduce((n, s) => s.regular - s.price > n.regular - n.price ? s : n, e[0]) === a && a.regular - a.price > 0 && !i.some((n) => n[1] === "gold") && i.push(["الأوفر", "gold"]), a.available || i.unshift(["نفد", ""]), i.slice(0, 3);
+  badges(a, r) {
+    const e = [], i = a.regular > a.price ? Math.round((1 - a.price / a.regular) * 100) : 0;
+    return i >= 5 && e.push([`خصم ${i}٪`, "hot"]), a.qty != null && a.qty > 0 && a.qty <= 5 && e.push([`آخر ${a.qty} قطع`, ""]), r.reduce((o, s) => s.rating * Math.log2(2 + s.ratingCount) > o.rating * Math.log2(2 + o.ratingCount) ? s : o, r[0]) === a && a.rating >= 4 && e.push(["الأعلى تقييماً", "gold"]), r.reduce((o, s) => s.regular - s.price > o.regular - o.price ? s : o, r[0]) === a && a.regular - a.price > 0 && !e.some((o) => o[1] === "gold") && e.push(["الأوفر", "gold"]), a.available || e.unshift(["نفد", ""]), e.slice(0, 3);
   }
   async add(a) {
-    this.busy = a.id, await C(a.id), this.busy = 0, S(`انضاف «${a.name}» للسلة`);
+    this.busy = a.id, await S(a.id), this.busy = 0, j(`انضاف «${a.name}» للسلة`);
   }
   render() {
-    const a = this.config ?? {}, e = this.list;
+    const a = this.config ?? {}, r = this.list;
     return d`<section class=${a.dark ? "dark" : ""} style=${a.color ? `--tf-custom:${a.color}` : ""}><div class="wrap">
-      ${f(a.title) ? d`<span class="eyebrow">✦ مختارات</span><h2 class="title">${f(a.title)}</h2>` : ""}${f(a.subtitle) ? d`<p class="sub">${f(a.subtitle)}</p>` : ""}
-      <div class="grid">${e == null ? [1, 2, 3, 4].map(() => d`<div class="skel" style="aspect-ratio:.72"></div>`) : e.length ? e.map((i) => d`<article class="c">
-          <a class="img" href=${i.url}><img src=${i.image} alt=${i.name} loading="lazy" /></a>
-          <div class="badges">${this.badges(i, e).map(([r, o]) => d`<span class="b ${o}">${r}</span>`)}</div>
-          <div class="body"><a class="n" href=${i.url}>${i.name}</a>
-            ${i.rating ? d`<span class="stars">${"★".repeat(Math.round(i.rating))}${"☆".repeat(5 - Math.round(i.rating))} <small>(${i.ratingCount})</small></span>` : ""}
-            <div class="p"><b>${b(i.price)}</b>${i.regular > i.price ? d`<s>${b(i.regular)}</s><span class="save">وفّر ${b(Math.round((i.regular - i.price) * 100) / 100)}</span>` : ""}</div>
-            <button class="btn" ?disabled=${!i.available || this.busy === i.id} @click=${() => this.add(i)}>${this.busy === i.id ? "..." : i.available ? "أضف للسلة" : "غير متوفر"}</button></div>
+      ${g(a.title) ? d`<span class="eyebrow">✦ مختارات</span><h2 class="title">${g(a.title)}</h2>` : ""}${g(a.subtitle) ? d`<p class="sub">${g(a.subtitle)}</p>` : ""}
+      <div class="grid">${r == null ? [1, 2, 3, 4].map(() => d`<div class="skel" style="aspect-ratio:.72"></div>`) : r.length ? r.map((e) => d`<article class="c">
+          <a class="img" href=${e.url}><img src=${e.image} alt=${e.name} loading="lazy" /></a>
+          <div class="badges">${this.badges(e, r).map(([i, n]) => d`<span class="b ${n}">${i}</span>`)}</div>
+          <div class="body"><a class="n" href=${e.url}>${e.name}</a>
+            ${e.rating ? d`<span class="stars">${"★".repeat(Math.round(e.rating))}${"☆".repeat(5 - Math.round(e.rating))} <small>(${e.ratingCount})</small></span>` : ""}
+            <div class="p"><b>${b(e.price)}</b>${e.regular > e.price ? d`<s>${b(e.regular)}</s><span class="save">وفّر ${b(Math.round((e.regular - e.price) * 100) / 100)}</span>` : ""}</div>
+            <button class="btn" ?disabled=${!e.available || this.busy === e.id} @click=${() => this.add(e)}>${this.busy === e.id ? "..." : e.available ? "أضف للسلة" : "غير متوفر"}</button></div>
         </article>`) : d`<p class="sub">اختر المنتجات من إعدادات العنصر.</p>`}</div></div></section>`;
   }
 };
-h.styles = [p, y`
+h.styles = [p, x`
     .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(240px, 44vw), 1fr)); }
     .c { position: relative; border-radius: 20px; overflow: hidden; background: var(--card, #fff); color: inherit; border: 1px solid #8882; transition: transform .35s, box-shadow .35s; display: flex; flex-direction: column; }
     .dark .c { --card: #17122b; border-color: #2b2348; }
@@ -129,17 +154,17 @@ h.styles = [p, y`
     .save { font-size: 12px; color: #16a34a; font-weight: 700; } .stars { font-size: 13px; color: #f5b301; }
     .btn { justify-content: center; margin-top: auto; padding: 11px; }
   `];
-let u = h;
+let f = h;
 m([
   k({ type: Object })
-], u.prototype, "config");
+], f.prototype, "config");
 m([
   v()
-], u.prototype, "list");
+], f.prototype, "list");
 m([
   v()
-], u.prototype, "busy");
-typeof u < "u" && u.registerSallaComponent("salla-tuhfa-smart-products");
+], f.prototype, "busy");
+typeof f < "u" && f.registerSallaComponent("salla-tuhfa-smart-products");
 export {
-  u as default
+  f as default
 };

@@ -1,6 +1,6 @@
-import { css as b, LitElement as x, html as a } from "lit";
-import { property as m, state as u } from "lit/decorators.js";
-const h = b`
+import { css as g, LitElement as m, html as o } from "lit";
+import { property as x, state as b } from "lit/decorators.js";
+const v = g`
   :host { display: block; --tf-accent: var(--tf-custom, var(--color-primary, #c9a45c)); --tf-ink: #0f0c18; --tf-ivory: #f6f1e7; --tf-mut: #a59bc2;
     --tf-gold: linear-gradient(135deg, #f5d68a, #c9a45c 55%, #9a7634); font-family: inherit; direction: inherit; }
   :host([hidden]) { display: none; }
@@ -17,21 +17,46 @@ const h = b`
   .skel { background: linear-gradient(90deg, #8881 0, #8882 50%, #8881 100%); background-size: 200% 100%; animation: sk 1.4s infinite; border-radius: 14px; }
   @keyframes sk { to { background-position: -200% 0; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-`, v = () => window.Salla;
-function k(i) {
+`, p = () => window.Salla;
+function y(i) {
   var t, e;
   try {
-    (e = (t = v()) == null ? void 0 : t.success) == null || e.call(t, i);
+    (e = (t = p()) == null ? void 0 : t.success) == null || e.call(t, i);
   } catch {
   }
 }
-const s = (i) => String(i && typeof i == "object" ? i[(document.documentElement.lang || "ar").slice(0, 2)] ?? i.ar ?? "" : i ?? "");
-var y = Object.defineProperty, p = (i, t, e, d) => {
-  for (var n = void 0, o = i.length - 1, c; o >= 0; o--)
-    (c = i[o]) && (n = c(t, e, n) || n);
-  return n && y(t, e, n), n;
+const k = () => {
+  var i, t, e, n, r;
+  try {
+    const a = ((t = (i = p()) == null ? void 0 : i.lang) == null ? void 0 : t.locale) ?? ((r = (n = (e = p()) == null ? void 0 : e.config) == null ? void 0 : n.get) == null ? void 0 : r.call(n, "user.language_code"));
+    if (typeof a == "string" && a) return a.slice(0, 2);
+  } catch {
+  }
+  return (document.documentElement.lang || "ar").slice(0, 2);
+}, c = (i) => {
+  if (i == null) return "";
+  if (typeof i == "string") {
+    const t = i.trim();
+    if (t.startsWith("{") && t.endsWith("}"))
+      try {
+        return c(JSON.parse(t));
+      } catch {
+      }
+    return i;
+  }
+  if (typeof i == "number" || typeof i == "boolean") return String(i);
+  if (typeof i == "object") {
+    const t = i, e = t[k()] ?? t.ar ?? t.en ?? Object.values(t).find((n) => typeof n == "string" && n);
+    return typeof e == "string" ? e : "";
+  }
+  return "";
 };
-const f = class f extends x {
+var w = Object.defineProperty, f = (i, t, e, n) => {
+  for (var r = void 0, a = i.length - 1, l; a >= 0; a--)
+    (l = i[a]) && (r = l(t, e, r) || r);
+  return r && w(t, e, r), r;
+};
+const u = class u extends m {
   constructor() {
     super(...arguments), this.left = 0, this.copied = !1;
   }
@@ -57,24 +82,24 @@ const f = class f extends x {
       await navigator.clipboard.writeText(t);
     } catch {
     }
-    this.copied = !0, k(`تم نسخ الكود ${t}`), setTimeout(() => this.copied = !1, 1800);
+    this.copied = !0, y(`تم نسخ الكود ${t}`), setTimeout(() => this.copied = !1, 1800);
   }
   render() {
     const t = this.config ?? {};
-    if (!this.end()) return a`<div class="wrap"><p class="sub">حدد تاريخ ونهاية العرض من إعدادات العنصر.</p></div>`;
-    const e = this.left, d = Math.floor(e / 86400), n = Math.floor(e % 86400 / 3600), o = Math.floor(e % 3600 / 60), c = e % 60, l = (g) => String(g).padStart(2, "0");
-    return a`<div class="wrap"><div class="box dark ${e ? "" : "ended"}" style=${t.color ? `--tf-custom:${t.color}` : ""}>
+    if (!this.end()) return o`<div class="wrap"><p class="sub">حدد تاريخ ونهاية العرض من إعدادات العنصر.</p></div>`;
+    const e = this.left, n = Math.floor(e / 86400), r = Math.floor(e % 86400 / 3600), a = Math.floor(e % 3600 / 60), l = e % 60, d = (h) => String(h).padStart(2, "0");
+    return o`<div class="wrap"><div class="box dark ${e ? "" : "ended"}" style=${t.color ? `--tf-custom:${t.color}` : ""}>
       <div class="in"><span class="eyebrow">⏳ عرض لفترة محدودة</span>
-        <h2 class="title">${s(t.title) || "عرض خاص"}</h2>${s(t.subtitle) ? a`<p class="sub" style="margin:0">${s(t.subtitle)}</p>` : ""}
-        ${e ? a`<div class="clock ${e < 3600 ? "urgent" : ""}" role="timer" aria-label="الوقت المتبقي">${d ? a`<div class="u"><b>${d}</b><span>يوم</span></div>` : ""}
-          <div class="u"><b>${l(n)}</b><span>ساعة</span></div><div class="u"><b>${l(o)}</b><span>دقيقة</span></div><div class="u"><b>${l(c)}</b><span>ثانية</span></div></div>` : a`<b>انتهى العرض</b>`}
-        ${t.coupon && e ? a`<button class="cp" @click=${this.copy}>الكود <code>${t.coupon}</code> <small>${this.copied ? "تم النسخ ✓" : "اضغط للنسخ"}</small></button>` : ""}
-        ${s(t.button) && t.link && e ? a`<a class="btn" href=${t.link}>${s(t.button)} ←</a>` : ""}</div>
-      ${t.image ? a`<div class="media"><img src=${t.image} alt="" loading="lazy" /></div>` : ""}
+        <h2 class="title">${c(t.title) || "عرض خاص"}</h2>${c(t.subtitle) ? o`<p class="sub" style="margin:0">${c(t.subtitle)}</p>` : ""}
+        ${e ? o`<div class="clock ${e < 3600 ? "urgent" : ""}" role="timer" aria-label="الوقت المتبقي">${n ? o`<div class="u"><b>${n}</b><span>يوم</span></div>` : ""}
+          <div class="u"><b>${d(r)}</b><span>ساعة</span></div><div class="u"><b>${d(a)}</b><span>دقيقة</span></div><div class="u"><b>${d(l)}</b><span>ثانية</span></div></div>` : o`<b>انتهى العرض</b>`}
+        ${t.coupon && e ? o`<button class="cp" @click=${this.copy}>الكود <code>${t.coupon}</code> <small>${this.copied ? "تم النسخ ✓" : "اضغط للنسخ"}</small></button>` : ""}
+        ${c(t.button) && t.link && e ? o`<a class="btn" href=${t.link}>${c(t.button)} ←</a>` : ""}</div>
+      ${t.image ? o`<div class="media"><img src=${t.image} alt="" loading="lazy" /></div>` : ""}
     </div></div>`;
   }
 };
-f.styles = [h, b`
+u.styles = [v, g`
     .box { position: relative; overflow: hidden; border-radius: 26px; display: grid; grid-template-columns: 1.1fr .9fr; min-height: 340px; }
     @media (max-width: 760px) { .box { grid-template-columns: 1fr; } .media { height: 220px; order: -1; } }
     .media { position: relative; } .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -90,17 +115,17 @@ f.styles = [h, b`
     .cp code { font-size: 20px; letter-spacing: .15em; font-weight: 800; direction: ltr; }
     .ended { opacity: .8; }
   `];
-let r = f;
-p([
-  m({ type: Object })
-], r.prototype, "config");
-p([
-  u()
-], r.prototype, "left");
-p([
-  u()
-], r.prototype, "copied");
-typeof r < "u" && r.registerSallaComponent("salla-tuhfa-countdown");
+let s = u;
+f([
+  x({ type: Object })
+], s.prototype, "config");
+f([
+  b()
+], s.prototype, "left");
+f([
+  b()
+], s.prototype, "copied");
+typeof s < "u" && s.registerSallaComponent("salla-tuhfa-countdown");
 export {
-  r as default
+  s as default
 };

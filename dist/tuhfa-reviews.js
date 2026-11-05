@@ -1,6 +1,6 @@
-import { css as f, LitElement as m, html as i } from "lit";
-import { property as x } from "lit/decorators.js";
-const b = f`
+import { css as m, LitElement as x, html as p } from "lit";
+import { property as b } from "lit/decorators.js";
+const h = m`
   :host { display: block; --tf-accent: var(--tf-custom, var(--color-primary, #c9a45c)); --tf-ink: #0f0c18; --tf-ivory: #f6f1e7; --tf-mut: #a59bc2;
     --tf-gold: linear-gradient(135deg, #f5d68a, #c9a45c 55%, #9a7634); font-family: inherit; direction: inherit; }
   :host([hidden]) { display: none; }
@@ -17,28 +17,53 @@ const b = f`
   .skel { background: linear-gradient(90deg, #8881 0, #8882 50%, #8881 100%); background-size: 200% 100%; animation: sk 1.4s infinite; border-radius: 14px; }
   @keyframes sk { to { background-position: -200% 0; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-`, s = (n) => String(n && typeof n == "object" ? n[(document.documentElement.lang || "ar").slice(0, 2)] ?? n.ar ?? "" : n ?? ""), h = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-var u = Object.defineProperty, v = (n, e, t, g) => {
-  for (var r = void 0, o = n.length - 1, a; o >= 0; o--)
-    (a = n[o]) && (r = a(e, t, r) || r);
-  return r && u(e, t, r), r;
+`, g = () => window.Salla, u = () => {
+  var r, t, a, i, n;
+  try {
+    const o = ((t = (r = g()) == null ? void 0 : r.lang) == null ? void 0 : t.locale) ?? ((n = (i = (a = g()) == null ? void 0 : a.config) == null ? void 0 : i.get) == null ? void 0 : n.call(i, "user.language_code"));
+    if (typeof o == "string" && o) return o.slice(0, 2);
+  } catch {
+  }
+  return (document.documentElement.lang || "ar").slice(0, 2);
+}, s = (r) => {
+  if (r == null) return "";
+  if (typeof r == "string") {
+    const t = r.trim();
+    if (t.startsWith("{") && t.endsWith("}"))
+      try {
+        return s(JSON.parse(t));
+      } catch {
+      }
+    return r;
+  }
+  if (typeof r == "number" || typeof r == "boolean") return String(r);
+  if (typeof r == "object") {
+    const t = r, a = t[u()] ?? t.ar ?? t.en ?? Object.values(t).find((i) => typeof i == "string" && i);
+    return typeof a == "string" ? a : "";
+  }
+  return "";
+}, y = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+var v = Object.defineProperty, k = (r, t, a, i) => {
+  for (var n = void 0, o = r.length - 1, e; o >= 0; o--)
+    (e = r[o]) && (n = e(t, a, n) || n);
+  return n && v(t, a, n), n;
 };
-const l = class l extends m {
+const f = class f extends x {
   render() {
-    const e = this.config ?? {}, t = (e.reviews ?? []).filter((a) => s(a == null ? void 0 : a.text)), g = t.length ? t.reduce((a, d) => a + Math.max(1, Math.min(5, Number(d.stars) || 5)), 0) / t.length : 0, r = (a) => {
-      const d = s(a.name) || "عميل", c = Math.max(1, Math.min(5, Math.round(Number(a.stars) || 5)));
-      return i`<figure class="r"><span class="stars" aria-label=${`${c} من 5`}>${"★".repeat(c)}${"☆".repeat(5 - c)}</span><p>«${s(a.text)}»</p>
-        <figcaption class="who"><span class="av">${d.trim()[0]}</span>${d}${s(a.city) ? ` · ${s(a.city)}` : ""}</figcaption></figure>`;
-    }, o = t.length > 2 && !h();
-    return i`<section class=${e.dark ? "dark" : ""} style=${e.color ? `--tf-custom:${e.color}` : ""}><div class="wrap">
-      <div class="head"><div><span class="eyebrow">✦ ثقة عملائنا</span><h2 class="title">${s(e.title) || "وش يقولون عنا"}</h2></div>
-        ${t.length ? i`<div class="avg"><b>${g.toFixed(1)}</b><div><div class="stars">★★★★★</div><small>من ${t.length} تقييم مختار</small></div></div>` : ""}</div>
-      ${t.length ? i`<div class="rail"><div class="track" style=${`--d:${Math.max(20, t.length * 8)}s;${o ? "" : "animation:none;flex-wrap:wrap;width:auto"}`}>${t.map(r)}${o ? t.map(r) : ""}</div></div>` : i`<p class="sub">أضف آراء عملائك من إعدادات العنصر.</p>`}
-      ${(e.badges ?? []).length ? i`<div class="badges">${(e.badges ?? []).map((a) => i`<span class="bd">${a.emoji ?? "✓"} ${s(a.text)}</span>`)}</div>` : ""}
+    const t = this.config ?? {}, a = (t.reviews ?? []).filter((e) => s(e == null ? void 0 : e.text)), i = a.length ? a.reduce((e, l) => e + Math.max(1, Math.min(5, Number(l.stars) || 5)), 0) / a.length : 0, n = (e) => {
+      const l = s(e.name) || "عميل", d = Math.max(1, Math.min(5, Math.round(Number(e.stars) || 5)));
+      return p`<figure class="r"><span class="stars" aria-label=${`${d} من 5`}>${"★".repeat(d)}${"☆".repeat(5 - d)}</span><p>«${s(e.text)}»</p>
+        <figcaption class="who"><span class="av">${l.trim()[0]}</span>${l}${s(e.city) ? ` · ${s(e.city)}` : ""}</figcaption></figure>`;
+    }, o = a.length > 2 && !y();
+    return p`<section class=${t.dark ? "dark" : ""} style=${t.color ? `--tf-custom:${t.color}` : ""}><div class="wrap">
+      <div class="head"><div><span class="eyebrow">✦ ثقة عملائنا</span><h2 class="title">${s(t.title) || "وش يقولون عنا"}</h2></div>
+        ${a.length ? p`<div class="avg"><b>${i.toFixed(1)}</b><div><div class="stars">★★★★★</div><small>من ${a.length} تقييم مختار</small></div></div>` : ""}</div>
+      ${a.length ? p`<div class="rail"><div class="track" style=${`--d:${Math.max(20, a.length * 8)}s;${o ? "" : "animation:none;flex-wrap:wrap;width:auto"}`}>${a.map(n)}${o ? a.map(n) : ""}</div></div>` : p`<p class="sub">أضف آراء عملائك من إعدادات العنصر.</p>`}
+      ${(t.badges ?? []).length ? p`<div class="badges">${(t.badges ?? []).map((e) => p`<span class="bd">${e.emoji ?? "✓"} ${s(e.text)}</span>`)}</div>` : ""}
     </div></section>`;
   }
 };
-l.styles = [b, f`
+f.styles = [h, m`
     .head { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; margin-bottom: 26px; }
     .avg { display: flex; align-items: center; gap: 12px; } .avg b { font-size: 46px; background: var(--tf-gold); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .stars { color: #f5b301; letter-spacing: 2px; }
@@ -52,11 +77,11 @@ l.styles = [b, f`
     .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; justify-content: center; }
     .bd { display: flex; gap: 8px; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid #8883; font-size: 14px; }
   `];
-let p = l;
-v([
-  x({ type: Object })
-], p.prototype, "config");
-typeof p < "u" && p.registerSallaComponent("salla-tuhfa-reviews");
+let c = f;
+k([
+  b({ type: Object })
+], c.prototype, "config");
+typeof c < "u" && c.registerSallaComponent("salla-tuhfa-reviews");
 export {
-  p as default
+  c as default
 };

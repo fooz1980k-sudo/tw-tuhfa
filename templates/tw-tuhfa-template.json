@@ -1,0 +1,808 @@
+{
+  "id": "1b8a4e06-fc83-5fd6-be01-5a5609e8425c",
+  "components": [
+    {
+      "title": "تُحفة · عرض سينمائي",
+      "icon": "sicon-image-carousel",
+      "name": "tuhfa-hero",
+      "key": "f093269b-b259-5171-a374-2c36c2ff4616",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-hero.jpg",
+      "fields": [
+        {
+          "id": "slides",
+          "icon": "sicon-list",
+          "type": "collection",
+          "format": "collection",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 8,
+          "item_label": "شريحة",
+          "fields": [
+            {
+              "id": "image",
+              "icon": "sicon-image-landscape",
+              "type": "string",
+              "format": "image",
+              "label": "الصورة (يفضّل 1920×1080)",
+              "required": false,
+              "value": ""
+            },
+            {
+              "id": "title",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "العنوان",
+              "format": "text",
+              "required": false,
+              "maxLength": 80,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "subtitle",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "الوصف",
+              "format": "textarea",
+              "required": false,
+              "maxLength": 200,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "button",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "نص الزر",
+              "format": "text",
+              "required": false,
+              "maxLength": 30,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "link",
+              "icon": "sicon-link",
+              "type": "string",
+              "format": "url",
+              "label": "رابط الزر",
+              "required": false,
+              "value": "",
+              "placeholder": "https://"
+            }
+          ],
+          "value": [
+            {
+              "image": "",
+              "title": "مجموعة الشتاء الفاخرة",
+              "subtitle": "قطع مختارة بعناية، بخامات تليق بك",
+              "button": "تسوّق الآن",
+              "link": "/"
+            }
+          ]
+        },
+        {
+          "id": "height",
+          "icon": "sicon-hashtag",
+          "type": "number",
+          "format": "slider",
+          "label": "الارتفاع (% من الشاشة)",
+          "required": false,
+          "value": 78,
+          "minimum": 50,
+          "maximum": 100
+        },
+        {
+          "id": "seconds",
+          "icon": "sicon-hashtag",
+          "type": "number",
+          "format": "slider",
+          "label": "مدة كل شريحة (ثانية)",
+          "required": false,
+          "value": 7,
+          "minimum": 3,
+          "maximum": 20
+        },
+        {
+          "id": "overlay",
+          "icon": "sicon-hashtag",
+          "type": "number",
+          "format": "slider",
+          "label": "تعتيم الصورة (%)",
+          "required": false,
+          "value": 55,
+          "minimum": 0,
+          "maximum": 85
+        },
+        {
+          "id": "align",
+          "icon": "sicon-align-center",
+          "type": "items",
+          "format": "radio-list",
+          "label": "محاذاة النص",
+          "required": false,
+          "options": [
+            {
+              "label": "جانبي",
+              "value": "start",
+              "key": "start"
+            },
+            {
+              "label": "في المنتصف",
+              "value": "center",
+              "key": "center"
+            }
+          ],
+          "selected": [
+            {
+              "label": "جانبي",
+              "value": "start",
+              "key": "start"
+            }
+          ]
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · منتجات ذكية",
+      "icon": "sicon-star",
+      "name": "tuhfa-smart-products",
+      "key": "e63d01bf-9778-5f2b-9e2f-e9352a33211c",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-smart-products.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "اختياراتنا لك",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "subtitle",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "الوصف",
+          "format": "textarea",
+          "required": false,
+          "maxLength": 200,
+          "value": "شارات ذكية تُحسب تلقائياً: خصم، آخر القطع، الأعلى تقييماً، الأوفر",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "products",
+          "icon": "sicon-box",
+          "type": "items",
+          "label": "اختر المنتجات",
+          "placeholder": "ابحث في منتجاتك...",
+          "format": "dropdown-list",
+          "source": "products",
+          "options": [],
+          "required": true,
+          "selected": [],
+          "searchable": true,
+          "multichoice": true,
+          "minLength": 1,
+          "maxLength": 12
+        },
+        {
+          "id": "dark",
+          "icon": "sicon-toggle-off",
+          "type": "boolean",
+          "format": "switch",
+          "label": "خلفية داكنة فاخرة",
+          "required": false,
+          "value": false
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · عرض بعدّاد",
+      "icon": "sicon-time",
+      "name": "tuhfa-countdown",
+      "key": "ff51ac99-0f78-53a6-83e0-1f013462bceb",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-countdown.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "عرض نهاية الأسبوع",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "subtitle",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "الوصف",
+          "format": "textarea",
+          "required": false,
+          "maxLength": 200,
+          "value": "خصم على كل المجموعة لفترة محدودة",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "end",
+          "icon": "sicon-calendar-time",
+          "type": "string",
+          "format": "datetime",
+          "inputType": "date",
+          "label": "ينتهي العرض في",
+          "required": true,
+          "value": ""
+        },
+        {
+          "id": "coupon",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "كود الخصم (اختياري)",
+          "format": "text",
+          "required": false,
+          "maxLength": 30,
+          "value": "",
+          "placeholder": ""
+        },
+        {
+          "id": "image",
+          "icon": "sicon-image-landscape",
+          "type": "string",
+          "format": "image",
+          "label": "صورة العرض",
+          "required": false,
+          "value": ""
+        },
+        {
+          "id": "button",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "نص الزر",
+          "format": "text",
+          "required": false,
+          "maxLength": 30,
+          "value": "تسوّق العرض",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "link",
+          "icon": "sicon-link",
+          "type": "string",
+          "format": "url",
+          "label": "رابط الزر",
+          "required": false,
+          "value": "",
+          "placeholder": "https://"
+        },
+        {
+          "id": "hide_after",
+          "icon": "sicon-toggle-off",
+          "type": "boolean",
+          "format": "switch",
+          "label": "إخفاء العنصر تلقائياً بعد انتهاء العرض",
+          "required": false,
+          "value": true
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · متجرنا بالأرقام",
+      "icon": "sicon-chart-bar",
+      "name": "tuhfa-numbers",
+      "key": "f9615bf5-b129-54f1-8b20-f05703f5b8ef",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-numbers.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "متجرنا بالأرقام",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "subtitle",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "الوصف",
+          "format": "textarea",
+          "required": false,
+          "maxLength": 200,
+          "value": "",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "items",
+          "icon": "sicon-list",
+          "type": "collection",
+          "format": "collection",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 6,
+          "item_label": "رقم",
+          "fields": [
+            {
+              "id": "icon",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "رمز تعبيري",
+              "format": "text",
+              "required": false,
+              "maxLength": 4,
+              "value": "⭐",
+              "placeholder": "مثلاً ⭐"
+            },
+            {
+              "id": "number",
+              "icon": "sicon-hashtag",
+              "type": "number",
+              "format": "number",
+              "label": "الرقم",
+              "required": true,
+              "value": 0
+            },
+            {
+              "id": "suffix",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "بعد الرقم",
+              "format": "text",
+              "required": false,
+              "maxLength": 8,
+              "value": "+",
+              "placeholder": "+ أو ٪ أو ألف",
+              "multilanguage": true
+            },
+            {
+              "id": "label",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "الوصف",
+              "format": "text",
+              "required": false,
+              "maxLength": 40,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            }
+          ],
+          "value": [
+            {
+              "icon": "😊",
+              "number": 12000,
+              "suffix": "+",
+              "label": "عميل سعيد"
+            },
+            {
+              "icon": "📦",
+              "number": 25000,
+              "suffix": "+",
+              "label": "طلب وصل"
+            },
+            {
+              "icon": "⭐",
+              "number": 98,
+              "suffix": "٪",
+              "label": "تقييمات إيجابية"
+            },
+            {
+              "icon": "🚚",
+              "number": 48,
+              "suffix": " ساعة",
+              "label": "متوسط التوصيل"
+            }
+          ]
+        },
+        {
+          "id": "light",
+          "icon": "sicon-toggle-off",
+          "type": "boolean",
+          "format": "switch",
+          "label": "خلفية فاتحة",
+          "required": false,
+          "value": false
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · قارن قبل ما تشتري",
+      "icon": "sicon-swap-horizontal",
+      "name": "tuhfa-compare",
+      "key": "4e689d49-808c-5e57-8252-f33c6f46cb58",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-compare.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "أيهم يناسبك؟",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "subtitle",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "الوصف",
+          "format": "textarea",
+          "required": false,
+          "maxLength": 200,
+          "value": "نقارن لك السعر والتوفير والتقييم والتوفر، ونرشّح الاختيار الذكي",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "products",
+          "icon": "sicon-box",
+          "type": "items",
+          "label": "اختر المنتجات",
+          "placeholder": "ابحث في منتجاتك...",
+          "format": "dropdown-list",
+          "source": "products",
+          "options": [],
+          "required": true,
+          "selected": [],
+          "searchable": true,
+          "multichoice": true,
+          "minLength": 2,
+          "maxLength": 4
+        },
+        {
+          "id": "dark",
+          "icon": "sicon-toggle-off",
+          "type": "boolean",
+          "format": "switch",
+          "label": "خلفية داكنة فاخرة",
+          "required": false,
+          "value": false
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · جدار الثقة",
+      "icon": "sicon-chat-bubbles",
+      "name": "tuhfa-reviews",
+      "key": "814aea00-cde3-5838-b7ef-d77919dbd6dc",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-reviews.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "وش يقولون عنا",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "reviews",
+          "icon": "sicon-list",
+          "type": "collection",
+          "format": "collection",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 20,
+          "item_label": "رأي عميل",
+          "fields": [
+            {
+              "id": "name",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "اسم العميل",
+              "format": "text",
+              "required": false,
+              "maxLength": 40,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "city",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "المدينة",
+              "format": "text",
+              "required": false,
+              "maxLength": 30,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "text",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "الرأي",
+              "format": "textarea",
+              "required": false,
+              "maxLength": 300,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "stars",
+              "icon": "sicon-hashtag",
+              "type": "number",
+              "format": "slider",
+              "label": "النجوم",
+              "required": false,
+              "value": 5,
+              "minimum": 1,
+              "maximum": 5
+            }
+          ],
+          "value": [
+            {
+              "name": "نورة",
+              "city": "الرياض",
+              "text": "التغليف فخم والتوصيل سريع، تجربة تستاهل",
+              "stars": 5
+            },
+            {
+              "name": "فهد",
+              "city": "جدة",
+              "text": "الجودة أعلى من المتوقع وخدمة العملاء محترمة",
+              "stars": 5
+            },
+            {
+              "name": "سارة",
+              "city": "الدمام",
+              "text": "ثاني طلب لي ومستحيل يكون الأخير",
+              "stars": 5
+            }
+          ]
+        },
+        {
+          "id": "badges",
+          "icon": "sicon-shield-check",
+          "type": "collection",
+          "format": "collection",
+          "required": false,
+          "minLength": 0,
+          "maxLength": 6,
+          "item_label": "شارة ثقة",
+          "fields": [
+            {
+              "id": "emoji",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "رمز",
+              "format": "text",
+              "required": false,
+              "maxLength": 4,
+              "value": "✓",
+              "placeholder": ""
+            },
+            {
+              "id": "text",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "النص",
+              "format": "text",
+              "required": false,
+              "maxLength": 40,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            }
+          ],
+          "value": [
+            {
+              "emoji": "🔒",
+              "text": "دفع آمن"
+            },
+            {
+              "emoji": "🚚",
+              "text": "توصيل سريع"
+            },
+            {
+              "emoji": "↩️",
+              "text": "استرجاع سهل"
+            }
+          ]
+        },
+        {
+          "id": "dark",
+          "icon": "sicon-toggle-off",
+          "type": "boolean",
+          "format": "switch",
+          "label": "خلفية داكنة فاخرة",
+          "required": false,
+          "value": false
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "تُحفة · أقسام سينمائية",
+      "icon": "sicon-layout-grid-rearrange",
+      "name": "tuhfa-categories",
+      "key": "3145be20-1fbf-57b6-ad94-ebc200cffe8b",
+      "image": "https://raw.githubusercontent.com/fooz1980k-sudo/tw-tuhfa/main/previews/tuhfa-categories.jpg",
+      "fields": [
+        {
+          "id": "title",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "العنوان",
+          "format": "text",
+          "required": false,
+          "maxLength": 120,
+          "value": "تسوّق حسب القسم",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "subtitle",
+          "icon": "sicon-format-text-alt",
+          "type": "string",
+          "label": "الوصف",
+          "format": "textarea",
+          "required": false,
+          "maxLength": 200,
+          "value": "",
+          "placeholder": "",
+          "multilanguage": true
+        },
+        {
+          "id": "tiles",
+          "icon": "sicon-list",
+          "type": "collection",
+          "format": "collection",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 12,
+          "item_label": "قسم",
+          "fields": [
+            {
+              "id": "image",
+              "icon": "sicon-image-landscape",
+              "type": "string",
+              "format": "image",
+              "label": "الصورة",
+              "required": false,
+              "value": ""
+            },
+            {
+              "id": "title",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "اسم القسم",
+              "format": "text",
+              "required": false,
+              "maxLength": 40,
+              "value": "",
+              "placeholder": "",
+              "multilanguage": true
+            },
+            {
+              "id": "caption",
+              "icon": "sicon-format-text-alt",
+              "type": "string",
+              "label": "سطر صغير",
+              "format": "text",
+              "required": false,
+              "maxLength": 40,
+              "value": "",
+              "placeholder": "مثلاً: اكتشف المجموعة",
+              "multilanguage": true
+            },
+            {
+              "id": "link",
+              "icon": "sicon-link",
+              "type": "string",
+              "format": "url",
+              "label": "رابط القسم",
+              "required": false,
+              "value": "",
+              "placeholder": "https://"
+            }
+          ],
+          "value": [
+            {
+              "image": "",
+              "title": "عبايات",
+              "caption": "اكتشف المجموعة",
+              "link": "/"
+            }
+          ]
+        },
+        {
+          "id": "color",
+          "icon": "sicon-color-palette",
+          "type": "string",
+          "format": "color",
+          "inputType": "color",
+          "label": "لون مميز (اختياري — الافتراضي لون متجرك)",
+          "required": false,
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

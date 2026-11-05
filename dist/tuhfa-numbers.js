@@ -1,6 +1,6 @@
-import { css as d, LitElement as u, html as s } from "lit";
+import { css as f, LitElement as g, html as c } from "lit";
 import { property as m, state as b } from "lit/decorators.js";
-const g = d`
+const h = f`
   :host { display: block; --tf-accent: var(--tf-custom, var(--color-primary, #c9a45c)); --tf-ink: #0f0c18; --tf-ivory: #f6f1e7; --tf-mut: #a59bc2;
     --tf-gold: linear-gradient(135deg, #f5d68a, #c9a45c 55%, #9a7634); font-family: inherit; direction: inherit; }
   :host([hidden]) { display: none; }
@@ -17,13 +17,38 @@ const g = d`
   .skel { background: linear-gradient(90deg, #8881 0, #8882 50%, #8881 100%); background-size: 200% 100%; animation: sk 1.4s infinite; border-radius: 14px; }
   @keyframes sk { to { background-position: -200% 0; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-`, o = (i) => String(i && typeof i == "object" ? i[(document.documentElement.lang || "ar").slice(0, 2)] ?? i.ar ?? "" : i ?? ""), x = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-var h = Object.defineProperty, f = (i, t, r, e) => {
-  for (var n = void 0, c = i.length - 1, l; c >= 0; c--)
-    (l = i[c]) && (n = l(t, r, n) || n);
-  return n && h(t, r, n), n;
+`, d = () => window.Salla, x = () => {
+  var n, t, r, e, i;
+  try {
+    const a = ((t = (n = d()) == null ? void 0 : n.lang) == null ? void 0 : t.locale) ?? ((i = (e = (r = d()) == null ? void 0 : r.config) == null ? void 0 : e.get) == null ? void 0 : i.call(e, "user.language_code"));
+    if (typeof a == "string" && a) return a.slice(0, 2);
+  } catch {
+  }
+  return (document.documentElement.lang || "ar").slice(0, 2);
+}, o = (n) => {
+  if (n == null) return "";
+  if (typeof n == "string") {
+    const t = n.trim();
+    if (t.startsWith("{") && t.endsWith("}"))
+      try {
+        return o(JSON.parse(t));
+      } catch {
+      }
+    return n;
+  }
+  if (typeof n == "number" || typeof n == "boolean") return String(n);
+  if (typeof n == "object") {
+    const t = n, r = t[x()] ?? t.ar ?? t.en ?? Object.values(t).find((e) => typeof e == "string" && e);
+    return typeof r == "string" ? r : "";
+  }
+  return "";
+}, k = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+var y = Object.defineProperty, u = (n, t, r, e) => {
+  for (var i = void 0, a = n.length - 1, p; a >= 0; a--)
+    (p = n[a]) && (i = p(t, r, i) || i);
+  return i && y(t, r, i), i;
 };
-const p = class p extends u {
+const l = class l extends g {
   constructor() {
     super(...arguments), this.k = 0;
   }
@@ -38,12 +63,12 @@ const p = class p extends u {
     super.disconnectedCallback(), (t = this.io) == null || t.disconnect();
   }
   run() {
-    if (x()) {
+    if (k()) {
       this.k = 1;
       return;
     }
-    const t = performance.now(), r = 1600, e = (n) => {
-      this.k = Math.min(1, (n - t) / r), this.k < 1 && requestAnimationFrame(e);
+    const t = performance.now(), r = 1600, e = (i) => {
+      this.k = Math.min(1, (i - t) / r), this.k < 1 && requestAnimationFrame(e);
     };
     requestAnimationFrame(e);
   }
@@ -52,14 +77,14 @@ const p = class p extends u {
   }
   render() {
     const t = this.config ?? {}, r = (t.items ?? []).filter((e) => e && (e.number != null || o(e.label)));
-    return s`<section class=${t.light ? "light" : "dark"} style=${t.color ? `--tf-custom:${t.color}` : ""}><div class="wrap">
-      ${o(t.title) ? s`<span class="eyebrow">✦ بالأرقام</span><h2 class="title">${o(t.title)}</h2>` : ""}${o(t.subtitle) ? s`<p class="sub">${o(t.subtitle)}</p>` : ""}
-      <div class="g">${r.map((e) => s`<div class="it">${e.icon ? s`<div class="ic" aria-hidden="true">${e.icon}</div>` : ""}
+    return c`<section class=${t.light ? "light" : "dark"} style=${t.color ? `--tf-custom:${t.color}` : ""}><div class="wrap">
+      ${o(t.title) ? c`<span class="eyebrow">✦ بالأرقام</span><h2 class="title">${o(t.title)}</h2>` : ""}${o(t.subtitle) ? c`<p class="sub">${o(t.subtitle)}</p>` : ""}
+      <div class="g">${r.map((e) => c`<div class="it">${e.icon ? c`<div class="ic" aria-hidden="true">${e.icon}</div>` : ""}
         <span class="n">${this.fmt(Number(e.number) || 0)}${o(e.suffix)}</span><span class="l">${o(e.label)}</span></div>`)}</div>
     </div></section>`;
   }
 };
-p.styles = [g, d`
+l.styles = [h, f`
     .g { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(200px, 42vw), 1fr)); }
     .it { position: relative; padding: 26px 20px; border-radius: 22px; text-align: center; background: #ffffff08; border: 1px solid #ffffff14; overflow: hidden; }
     .light .it { background: #fff; border-color: #0001; }
@@ -69,14 +94,14 @@ p.styles = [g, d`
     .l { font-size: 15px; opacity: .75; }
     .light { background: #faf7f1; color: #1b1408; }
   `];
-let a = p;
-f([
+let s = l;
+u([
   m({ type: Object })
-], a.prototype, "config");
-f([
+], s.prototype, "config");
+u([
   b()
-], a.prototype, "k");
-typeof a < "u" && a.registerSallaComponent("salla-tuhfa-numbers");
+], s.prototype, "k");
+typeof s < "u" && s.registerSallaComponent("salla-tuhfa-numbers");
 export {
-  a as default
+  s as default
 };

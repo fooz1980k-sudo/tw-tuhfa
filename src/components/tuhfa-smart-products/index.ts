@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { addToCart, money, products, toast, txt, type Prod } from '../../shared/salla';
+import { addToCart, money, products, toast, localizedString, type Prod } from '../../shared/salla';
 
 /** Products that sell themselves: live data from the store + automatic smart badges. */
 export default class TuhfaSmartProducts extends LitElement {
@@ -47,7 +47,7 @@ export default class TuhfaSmartProducts extends LitElement {
     const c = this.config ?? {};
     const L = this.list;
     return html`<section class=${c.dark ? 'dark' : ''} style=${c.color ? `--tf-custom:${c.color}` : ''}><div class="wrap">
-      ${txt(c.title) ? html`<span class="eyebrow">✦ مختارات</span><h2 class="title">${txt(c.title)}</h2>` : ''}${txt(c.subtitle) ? html`<p class="sub">${txt(c.subtitle)}</p>` : ''}
+      ${localizedString(c.title) ? html`<span class="eyebrow">✦ مختارات</span><h2 class="title">${localizedString(c.title)}</h2>` : ''}${localizedString(c.subtitle) ? html`<p class="sub">${localizedString(c.subtitle)}</p>` : ''}
       <div class="grid">${L == null ? [1, 2, 3, 4].map(() => html`<div class="skel" style="aspect-ratio:.72"></div>`)
         : !L.length ? html`<p class="sub">اختر المنتجات من إعدادات العنصر.</p>`
         : L.map((p) => html`<article class="c">

@@ -1,6 +1,6 @@
-import { css as v, LitElement as $, html as s } from "lit";
-import { property as w, state as k } from "lit/decorators.js";
-const z = v`
+import { css as y, LitElement as $, html as c } from "lit";
+import { property as k, state as z } from "lit/decorators.js";
+const j = y`
   :host { display: block; --tf-accent: var(--tf-custom, var(--color-primary, #c9a45c)); --tf-ink: #0f0c18; --tf-ivory: #f6f1e7; --tf-mut: #a59bc2;
     --tf-gold: linear-gradient(135deg, #f5d68a, #c9a45c 55%, #9a7634); font-family: inherit; direction: inherit; }
   :host([hidden]) { display: none; }
@@ -17,13 +17,38 @@ const z = v`
   .skel { background: linear-gradient(90deg, #8881 0, #8882 50%, #8881 100%); background-size: 200% 100%; animation: sk 1.4s infinite; border-radius: 14px; }
   @keyframes sk { to { background-position: -200% 0; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-`, o = (r) => String(r && typeof r == "object" ? r[(document.documentElement.lang || "ar").slice(0, 2)] ?? r.ar ?? "" : r ?? ""), M = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-var j = Object.defineProperty, y = (r, t, e, h) => {
-  for (var n = void 0, c = r.length - 1, d; c >= 0; c--)
-    (d = r[c]) && (n = d(t, e, n) || n);
-  return n && j(t, e, n), n;
+`, v = () => window.Salla, M = () => {
+  var e, t, i, r, n;
+  try {
+    const s = ((t = (e = v()) == null ? void 0 : e.lang) == null ? void 0 : t.locale) ?? ((n = (r = (i = v()) == null ? void 0 : i.config) == null ? void 0 : r.get) == null ? void 0 : n.call(r, "user.language_code"));
+    if (typeof s == "string" && s) return s.slice(0, 2);
+  } catch {
+  }
+  return (document.documentElement.lang || "ar").slice(0, 2);
+}, l = (e) => {
+  if (e == null) return "";
+  if (typeof e == "string") {
+    const t = e.trim();
+    if (t.startsWith("{") && t.endsWith("}"))
+      try {
+        return l(JSON.parse(t));
+      } catch {
+      }
+    return e;
+  }
+  if (typeof e == "number" || typeof e == "boolean") return String(e);
+  if (typeof e == "object") {
+    const t = e, i = t[M()] ?? t.ar ?? t.en ?? Object.values(t).find((r) => typeof r == "string" && r);
+    return typeof i == "string" ? i : "";
+  }
+  return "";
+}, C = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+var S = Object.defineProperty, w = (e, t, i, r) => {
+  for (var n = void 0, s = e.length - 1, p; s >= 0; s--)
+    (p = e[s]) && (n = p(t, i, n) || n);
+  return n && S(t, i, n), n;
 };
-const p = class p extends $ {
+const h = class h extends $ {
   constructor() {
     super(...arguments), this.i = 0, this.x0 = 0, this.vis = () => document.hidden ? clearInterval(this.timer) : this.play();
   }
@@ -39,39 +64,39 @@ const p = class p extends $ {
   }
   get slides() {
     var t;
-    return (((t = this.config) == null ? void 0 : t.slides) ?? []).filter((e) => e == null ? void 0 : e.image);
+    return (((t = this.config) == null ? void 0 : t.slides) ?? []).filter((i) => i == null ? void 0 : i.image);
   }
   get secs() {
     var t;
     return Math.max(3, Math.min(20, Number((t = this.config) == null ? void 0 : t.seconds) || 7));
   }
   play() {
-    clearInterval(this.timer), this.slides.length > 1 && !M() && (this.timer = window.setInterval(() => this.go(this.i + 1), this.secs * 1e3));
+    clearInterval(this.timer), this.slides.length > 1 && !C() && (this.timer = window.setInterval(() => this.go(this.i + 1), this.secs * 1e3));
   }
   go(t) {
-    const e = this.slides.length;
-    e && (this.i = (t + e) % e, this.play());
+    const i = this.slides.length;
+    i && (this.i = (t + i) % i, this.play());
   }
   render() {
-    var c, d, f, g, m, x, b, u;
+    var s, p, f, g, m, u, b, x;
     const t = this.slides;
-    if (!t.length) return s`<div class="empty">أضف صور العرض السينمائي من إعدادات العنصر</div>`;
-    const h = (Array.isArray((c = this.config) == null ? void 0 : c.align) ? (g = (f = (d = this.config) == null ? void 0 : d.align) == null ? void 0 : f[0]) == null ? void 0 : g.value : (m = this.config) == null ? void 0 : m.align) === "center", n = `--h:${Math.max(50, Math.min(100, Number((x = this.config) == null ? void 0 : x.height) || 78))}vh;--o:${Math.max(0, Math.min(85, Number(((b = this.config) == null ? void 0 : b.overlay) ?? 55))) / 100};--dur:${this.secs}s;--ji:${h ? "center" : "start"};--ta:${h ? "center" : "start"};${(u = this.config) != null && u.color ? `--tf-custom:${this.config.color}` : ""}`;
-    return s`<section class="hero" style=${n} @mouseenter=${() => clearInterval(this.timer)} @mouseleave=${() => this.play()}
-      @touchstart=${(i) => this.x0 = i.touches[0].clientX} @touchend=${(i) => {
-      const a = i.changedTouches[0].clientX - this.x0;
-      Math.abs(a) > 40 && this.go(this.i + (a < 0 ? 1 : -1));
+    if (!t.length) return c`<div class="empty">أضف صور العرض السينمائي من إعدادات العنصر</div>`;
+    const r = (Array.isArray((s = this.config) == null ? void 0 : s.align) ? (g = (f = (p = this.config) == null ? void 0 : p.align) == null ? void 0 : f[0]) == null ? void 0 : g.value : (m = this.config) == null ? void 0 : m.align) === "center", n = `--h:${Math.max(50, Math.min(100, Number((u = this.config) == null ? void 0 : u.height) || 78))}vh;--o:${Math.max(0, Math.min(85, Number(((b = this.config) == null ? void 0 : b.overlay) ?? 55))) / 100};--dur:${this.secs}s;--ji:${r ? "center" : "start"};--ta:${r ? "center" : "start"};${(x = this.config) != null && x.color ? `--tf-custom:${this.config.color}` : ""}`;
+    return c`<section class="hero" style=${n} @mouseenter=${() => clearInterval(this.timer)} @mouseleave=${() => this.play()}
+      @touchstart=${(a) => this.x0 = a.touches[0].clientX} @touchend=${(a) => {
+      const o = a.changedTouches[0].clientX - this.x0;
+      Math.abs(o) > 40 && this.go(this.i + (o < 0 ? 1 : -1));
     }}>
-      ${t.map((i, a) => s`<div class="s ${a === this.i ? "on" : ""}" aria-hidden=${a !== this.i}>
-        <img src=${i.image} alt=${o(i.title)} loading=${a ? "lazy" : "eager"} />
+      ${t.map((a, o) => c`<div class="s ${o === this.i ? "on" : ""}" aria-hidden=${o !== this.i}>
+        <img src=${a.image} alt=${l(a.title)} loading=${o ? "lazy" : "eager"} />
         <div class="shade"></div>
-        <div class="txt">${o(i.title) ? s`<h2>${o(i.title)}</h2>` : ""}${o(i.subtitle) ? s`<p>${o(i.subtitle)}</p>` : ""}
-          ${o(i.button) && i.link ? s`<a class="btn" href=${i.link}>${o(i.button)} ←</a>` : ""}</div></div>`)}
-      ${t.length > 1 ? s`<div class="bars">${t.map((i, a) => s`<button class="bar ${a === this.i ? "on" : a < this.i ? "done" : ""}" aria-label=${`الشريحة ${a + 1}`} @click=${() => this.go(a)}><i></i></button>`)}</div>` : ""}
+        <div class="txt">${l(a.title) ? c`<h2>${l(a.title)}</h2>` : ""}${l(a.subtitle) ? c`<p>${l(a.subtitle)}</p>` : ""}
+          ${l(a.button) && a.link ? c`<a class="btn" href=${a.link}>${l(a.button)} ←</a>` : ""}</div></div>`)}
+      ${t.length > 1 ? c`<div class="bars">${t.map((a, o) => c`<button class="bar ${o === this.i ? "on" : o < this.i ? "done" : ""}" aria-label=${`الشريحة ${o + 1}`} @click=${() => this.go(o)}><i></i></button>`)}</div>` : ""}
     </section>`;
   }
 };
-p.styles = [z, v`
+h.styles = [j, y`
     .hero { position: relative; overflow: hidden; height: var(--h, 78vh); min-height: 420px; max-height: 900px; color: #fff; background: #0f0c18; border-radius: 0; }
     .s { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
     .s.on { opacity: 1; }
@@ -92,14 +117,14 @@ p.styles = [z, v`
     @keyframes fill { to { width: 100%; } }
     .empty { display: grid; place-items: center; height: 300px; color: var(--tf-mut); background: #0f0c18; border: 1px dashed #c9a45c66; }
   `];
-let l = p;
-y([
-  w({ type: Object })
-], l.prototype, "config");
-y([
-  k()
-], l.prototype, "i");
-typeof l < "u" && l.registerSallaComponent("salla-tuhfa-hero");
+let d = h;
+w([
+  k({ type: Object })
+], d.prototype, "config");
+w([
+  z()
+], d.prototype, "i");
+typeof d < "u" && d.registerSallaComponent("salla-tuhfa-hero");
 export {
-  l as default
+  d as default
 };

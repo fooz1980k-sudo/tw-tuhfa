@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { reduced, txt } from '../../shared/salla';
+import { reduced, localizedString } from '../../shared/salla';
 
 interface Item { icon?: string; number?: number; suffix?: unknown; label?: unknown }
 /** «Our store in numbers»: animated count-up the moment the section scrolls into view. */
@@ -36,11 +36,11 @@ export default class TuhfaNumbers extends LitElement {
 
   render() {
     const c = this.config ?? {};
-    const items = (c.items ?? []).filter((i) => i && (i.number != null || txt(i.label)));
+    const items = (c.items ?? []).filter((i) => i && (i.number != null || localizedString(i.label)));
     return html`<section class=${c.light ? 'light' : 'dark'} style=${c.color ? `--tf-custom:${c.color}` : ''}><div class="wrap">
-      ${txt(c.title) ? html`<span class="eyebrow">✦ بالأرقام</span><h2 class="title">${txt(c.title)}</h2>` : ''}${txt(c.subtitle) ? html`<p class="sub">${txt(c.subtitle)}</p>` : ''}
+      ${localizedString(c.title) ? html`<span class="eyebrow">✦ بالأرقام</span><h2 class="title">${localizedString(c.title)}</h2>` : ''}${localizedString(c.subtitle) ? html`<p class="sub">${localizedString(c.subtitle)}</p>` : ''}
       <div class="g">${items.map((i) => html`<div class="it">${i.icon ? html`<div class="ic" aria-hidden="true">${i.icon}</div>` : ''}
-        <span class="n">${this.fmt(Number(i.number) || 0)}${txt(i.suffix)}</span><span class="l">${txt(i.label)}</span></div>`)}</div>
+        <span class="n">${this.fmt(Number(i.number) || 0)}${localizedString(i.suffix)}</span><span class="l">${localizedString(i.label)}</span></div>`)}</div>
     </div></section>`;
   }
 }

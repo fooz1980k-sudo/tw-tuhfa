@@ -31,6 +31,30 @@ export async function addToCart(id: number) {
   try { await S()?.cart?.addItem?.({ id, quantity: 1 }); } catch { location.href = `${location.origin}/p${id}`; }
 }
 export function toast(msg: string) { try { S()?.success?.(msg); } catch { /* no SDK */ } }
-/** Merchant text fields may be plain strings or {ar, en} when multilanguage. */
-export const txt = (v: unknown): string => (v && typeof v === 'object' ? String((v as Record<string, string>)[(document.documentElement.lang || 'ar').slice(0, 2)] ?? (v as Record<string, string>).ar ?? '') : String(v ?? ''));
+/** The store language: Salla's own setting first, then the page's lang attribute. */
+export const storeLocale = (): string => {
+  try { const l = S()?.lang?.locale ?? S()?.config?.get?.('user.language_code'); if (typeof l === 'string' && l) return l.slice(0, 2); } catch { /* no SDK */ }
+  return (document.documentElement.lang || 'ar').slice(0, 2);
+};
+/**
+ * Every merchant text field goes through this before it is rendered. A field
+ * declared `multilanguage: true` arrives as `{ ar, en }` (or a JSON string of
+ * it); a plain field arrives as a string. Always returns one string in the
+ * store language, falling back to Arabic, then to any language that has text.
+ */
+export const localizedString = (v: unknown): string => {
+  if (v == null) return '';
+  if (typeof v === 'string') {
+    const s = v.trim();
+    if (s.startsWith('{') && s.endsWith('}')) { try { return localizedString(JSON.parse(s)); } catch { /* plain text */ } }
+    return v;
+  }
+  if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+  if (typeof v === 'object') {
+    const o = v as Record<string, unknown>;
+    const pick = o[storeLocale()] ?? o.ar ?? o.en ?? Object.values(o).find((x) => typeof x === 'string' && x);
+    return typeof pick === 'string' ? pick : '';
+  }
+  return '';
+};
 export const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
