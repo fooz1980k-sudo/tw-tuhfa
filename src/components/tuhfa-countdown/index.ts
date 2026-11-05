@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { toast, txt } from '../../shared/salla';
+import { toast, localizedString } from '../../shared/salla';
 
 /** Luxury offer banner with a live countdown and one-tap coupon copy. Hides itself when the offer ends. */
 export default class TuhfaCountdown extends LitElement {
@@ -40,12 +40,12 @@ export default class TuhfaCountdown extends LitElement {
     const p = (n: number) => String(n).padStart(2, '0');
     return html`<div class="wrap"><div class="box dark ${s ? '' : 'ended'}" style=${c.color ? `--tf-custom:${c.color}` : ''}>
       <div class="in"><span class="eyebrow">⏳ عرض لفترة محدودة</span>
-        <h2 class="title">${txt(c.title) || 'عرض خاص'}</h2>${txt(c.subtitle) ? html`<p class="sub" style="margin:0">${txt(c.subtitle)}</p>` : ''}
+        <h2 class="title">${localizedString(c.title) || 'عرض خاص'}</h2>${localizedString(c.subtitle) ? html`<p class="sub" style="margin:0">${localizedString(c.subtitle)}</p>` : ''}
         ${s ? html`<div class="clock ${s < 3600 ? 'urgent' : ''}" role="timer" aria-label="الوقت المتبقي">${d ? html`<div class="u"><b>${d}</b><span>يوم</span></div>` : ''}
           <div class="u"><b>${p(h)}</b><span>ساعة</span></div><div class="u"><b>${p(m)}</b><span>دقيقة</span></div><div class="u"><b>${p(x)}</b><span>ثانية</span></div></div>`
           : html`<b>انتهى العرض</b>`}
         ${c.coupon && s ? html`<button class="cp" @click=${this.copy}>الكود <code>${c.coupon}</code> <small>${this.copied ? 'تم النسخ ✓' : 'اضغط للنسخ'}</small></button>` : ''}
-        ${txt(c.button) && c.link && s ? html`<a class="btn" href=${c.link}>${txt(c.button)} ←</a>` : ''}</div>
+        ${localizedString(c.button) && c.link && s ? html`<a class="btn" href=${c.link}>${localizedString(c.button)} ←</a>` : ''}</div>
       ${c.image ? html`<div class="media"><img src=${c.image} alt="" loading="lazy" /></div>` : ''}
     </div></div>`;
   }

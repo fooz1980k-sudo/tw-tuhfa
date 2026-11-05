@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { reduced, txt } from '../../shared/salla';
+import { reduced, localizedString } from '../../shared/salla';
 
 interface Review { name?: unknown; city?: unknown; text?: unknown; stars?: number }
 interface Badge { emoji?: string; text?: unknown }
@@ -26,18 +26,18 @@ export default class TuhfaReviews extends LitElement {
 
   render() {
     const c = this.config ?? {};
-    const R = (c.reviews ?? []).filter((r) => txt(r?.text));
+    const R = (c.reviews ?? []).filter((r) => localizedString(r?.text));
     const avg = R.length ? R.reduce((s, r) => s + Math.max(1, Math.min(5, Number(r.stars) || 5)), 0) / R.length : 0;
-    const card = (r: Review) => { const n = txt(r.name) || 'عميل'; const st = Math.max(1, Math.min(5, Math.round(Number(r.stars) || 5)));
-      return html`<figure class="r"><span class="stars" aria-label=${`${st} من 5`}>${'★'.repeat(st)}${'☆'.repeat(5 - st)}</span><p>«${txt(r.text)}»</p>
-        <figcaption class="who"><span class="av">${n.trim()[0]}</span>${n}${txt(r.city) ? ` · ${txt(r.city)}` : ''}</figcaption></figure>`; };
+    const card = (r: Review) => { const n = localizedString(r.name) || 'عميل'; const st = Math.max(1, Math.min(5, Math.round(Number(r.stars) || 5)));
+      return html`<figure class="r"><span class="stars" aria-label=${`${st} من 5`}>${'★'.repeat(st)}${'☆'.repeat(5 - st)}</span><p>«${localizedString(r.text)}»</p>
+        <figcaption class="who"><span class="av">${n.trim()[0]}</span>${n}${localizedString(r.city) ? ` · ${localizedString(r.city)}` : ''}</figcaption></figure>`; };
     const loop = R.length > 2 && !reduced();
     return html`<section class=${c.dark ? 'dark' : ''} style=${c.color ? `--tf-custom:${c.color}` : ''}><div class="wrap">
-      <div class="head"><div><span class="eyebrow">✦ ثقة عملائنا</span><h2 class="title">${txt(c.title) || 'وش يقولون عنا'}</h2></div>
+      <div class="head"><div><span class="eyebrow">✦ ثقة عملائنا</span><h2 class="title">${localizedString(c.title) || 'وش يقولون عنا'}</h2></div>
         ${R.length ? html`<div class="avg"><b>${avg.toFixed(1)}</b><div><div class="stars">★★★★★</div><small>من ${R.length} تقييم مختار</small></div></div>` : ''}</div>
       ${R.length ? html`<div class="rail"><div class="track" style=${`--d:${Math.max(20, R.length * 8)}s;${loop ? '' : 'animation:none;flex-wrap:wrap;width:auto'}`}>${R.map(card)}${loop ? R.map(card) : ''}</div></div>`
         : html`<p class="sub">أضف آراء عملائك من إعدادات العنصر.</p>`}
-      ${(c.badges ?? []).length ? html`<div class="badges">${(c.badges ?? []).map((b) => html`<span class="bd">${b.emoji ?? '✓'} ${txt(b.text)}</span>`)}</div>` : ''}
+      ${(c.badges ?? []).length ? html`<div class="badges">${(c.badges ?? []).map((b) => html`<span class="bd">${b.emoji ?? '✓'} ${localizedString(b.text)}</span>`)}</div>` : ''}
     </div></section>`;
   }
 }

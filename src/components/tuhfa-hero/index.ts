@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { reduced, txt } from '../../shared/salla';
+import { reduced, localizedString } from '../../shared/salla';
 
 interface Slide { image?: string; title?: unknown; subtitle?: unknown; button?: unknown; link?: string }
 /** Cinematic hero: slow Ken-Burns crossfade, progress bars, swipe, pauses on hover/hidden tab. */
@@ -51,10 +51,10 @@ export default class TuhfaHero extends LitElement {
     return html`<section class="hero" style=${style} @mouseenter=${() => clearInterval(this.timer)} @mouseleave=${() => this.play()}
       @touchstart=${(e: TouchEvent) => (this.x0 = e.touches[0].clientX)} @touchend=${(e: TouchEvent) => { const d = e.changedTouches[0].clientX - this.x0; if (Math.abs(d) > 40) this.go(this.i + (d < 0 ? 1 : -1)); }}>
       ${sl.map((s, k) => html`<div class="s ${k === this.i ? 'on' : ''}" aria-hidden=${k !== this.i}>
-        <img src=${s.image!} alt=${txt(s.title)} loading=${k ? 'lazy' : 'eager'} />
+        <img src=${s.image!} alt=${localizedString(s.title)} loading=${k ? 'lazy' : 'eager'} />
         <div class="shade"></div>
-        <div class="txt">${txt(s.title) ? html`<h2>${txt(s.title)}</h2>` : ''}${txt(s.subtitle) ? html`<p>${txt(s.subtitle)}</p>` : ''}
-          ${txt(s.button) && s.link ? html`<a class="btn" href=${s.link}>${txt(s.button)} ←</a>` : ''}</div></div>`)}
+        <div class="txt">${localizedString(s.title) ? html`<h2>${localizedString(s.title)}</h2>` : ''}${localizedString(s.subtitle) ? html`<p>${localizedString(s.subtitle)}</p>` : ''}
+          ${localizedString(s.button) && s.link ? html`<a class="btn" href=${s.link}>${localizedString(s.button)} ←</a>` : ''}</div></div>`)}
       ${sl.length > 1 ? html`<div class="bars">${sl.map((_, k) => html`<button class="bar ${k === this.i ? 'on' : k < this.i ? 'done' : ''}" aria-label=${`الشريحة ${k + 1}`} @click=${() => this.go(k)}><i></i></button>`)}</div>` : ''}
     </section>`;
   }

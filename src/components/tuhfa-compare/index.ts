@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { addToCart, money, products, toast, txt, type Prod } from '../../shared/salla';
+import { addToCart, money, products, toast, localizedString, type Prod } from '../../shared/salla';
 
 /** «Compare before you buy»: 2–4 products side by side, the smart pick highlighted automatically. */
 export default class TuhfaCompare extends LitElement {
@@ -34,7 +34,7 @@ export default class TuhfaCompare extends LitElement {
     // Smart pick: best rating-per-riyal among available products.
     const win = L?.filter((p) => p.available).reduce<Prod | null>((m, p) => (!m || (p.rating || 3) / Math.max(1, p.price) > (m.rating || 3) / Math.max(1, m.price) ? p : m), null);
     return html`<section class=${c.dark ? 'dark' : ''} style=${c.color ? `--tf-custom:${c.color}` : ''}><div class="wrap">
-      <span class="eyebrow">⚖️ قارن قبل ما تشتري</span><h2 class="title">${txt(c.title) || 'أيهم يناسبك؟'}</h2>${txt(c.subtitle) ? html`<p class="sub">${txt(c.subtitle)}</p>` : ''}
+      <span class="eyebrow">⚖️ قارن قبل ما تشتري</span><h2 class="title">${localizedString(c.title) || 'أيهم يناسبك؟'}</h2>${localizedString(c.subtitle) ? html`<p class="sub">${localizedString(c.subtitle)}</p>` : ''}
       ${L == null ? html`<div class="skel" style="height:420px"></div>` : html`<div class="t" style=${`--n:${L.length}`}>${L.map((p) => html`
         <article class="col ${p === win ? 'win' : ''}">${p === win ? html`<span class="crown">👑 الاختيار الذكي</span>` : ''}
           <img src=${p.image} alt=${p.name} loading="lazy" /><h3>${p.name}</h3>

@@ -819,5 +819,15 @@
         }
     ],
     "author_email": "fooz1980k@gmail.com",
-    "support_url": "https://smmlystore.com"
+    "support_url": "https://smmlystore.com",
+    "templates": [
+        {
+            "id": "1b8a4e06-fc83-5fd6-be01-5a5609e8425c",
+            "path": "templates.tw-tuhfa-template",
+            "category_id": "",
+            "primary_color": "",
+            "thumbnail": "",
+            "is_default": true
+        }
+    ]
 }

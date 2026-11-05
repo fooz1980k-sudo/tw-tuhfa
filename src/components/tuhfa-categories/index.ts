@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { base } from '../../shared/styles';
-import { txt } from '../../shared/salla';
+import { localizedString } from '../../shared/salla';
 
 interface Tile { image?: string; title?: unknown; caption?: unknown; link?: string }
 /** Editorial category tiles: asymmetric luxury grid, slow zoom + reveal on hover/focus. */
@@ -25,9 +25,9 @@ export default class TuhfaCategories extends LitElement {
   render() {
     const c = this.config ?? {}; const T = (c.tiles ?? []).filter((t) => t?.image);
     return html`<section style=${c.color ? `--tf-custom:${c.color}` : ''}><div class="wrap">
-      ${txt(c.title) ? html`<span class="eyebrow">✦ تسوّق حسب القسم</span><h2 class="title">${txt(c.title)}</h2>` : ''}${txt(c.subtitle) ? html`<p class="sub">${txt(c.subtitle)}</p>` : ''}
-      ${T.length ? html`<div class="g">${T.map((t) => html`<a href=${t.link || '#'}><img src=${t.image!} alt=${txt(t.title)} loading="lazy" />
-        <span class="cap"><span class="line"></span><b>${txt(t.title)}</b>${txt(t.caption) ? html`<small>${txt(t.caption)} ←</small>` : ''}</span></a>`)}</div>`
+      ${localizedString(c.title) ? html`<span class="eyebrow">✦ تسوّق حسب القسم</span><h2 class="title">${localizedString(c.title)}</h2>` : ''}${localizedString(c.subtitle) ? html`<p class="sub">${localizedString(c.subtitle)}</p>` : ''}
+      ${T.length ? html`<div class="g">${T.map((t) => html`<a href=${t.link || '#'}><img src=${t.image!} alt=${localizedString(t.title)} loading="lazy" />
+        <span class="cap"><span class="line"></span><b>${localizedString(t.title)}</b>${localizedString(t.caption) ? html`<small>${localizedString(t.caption)} ←</small>` : ''}</span></a>`)}</div>`
         : html`<p class="sub">أضف صور الأقسام من إعدادات العنصر.</p>`}
     </div></section>`;
   }
